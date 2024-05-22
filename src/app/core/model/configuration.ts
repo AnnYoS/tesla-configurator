@@ -1,10 +1,10 @@
 export interface Configuration {
-  configs: MotorConfigurations[];
+  configs: MotorConfiguration[];
   towHitch: boolean;
   yoke: boolean;
 }
 
-export interface MotorConfigurations {
+export interface MotorConfiguration {
   id: number;
   description: string;
   range: number;

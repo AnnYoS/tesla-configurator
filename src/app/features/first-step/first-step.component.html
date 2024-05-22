@@ -1,6 +1,23 @@
 <div>
-  @for (model of models(); track model.code) {
-    <ng-container>{{ model.code }}
-    </ng-container>
+  <h2>Step 1. Choose your Model and color</h2>
+  <form (change)="onFormChange()" [formGroup]="firstStepForm">
+    <label for="modelSelect">Model</label>
+    <select (change)="changeModel()" id="modelSelect" name="modelSelect" formControlName="model">
+      @for (model of models(); track model.code) {
+        <option value="{{ model.code }}">{{ model.description }}</option>
+      }
+    </select>
+    @if (this.firstStepForm.get('model')?.valid) {
+      <label for="colorSelect">Color</label>
+      <select id="colorSelect" name="colorSelect" formControlName="color">
+        @for (color of selectedTeslaModel?.colors; track color.code) {
+          <option value="{{ color.code }}">{{ color.description }}</option>
+        }
+      </select>
+    }
+  </form>
+  <!-- TODO ajouter composant affichage photo -->
+  @if (this.firstStepForm.valid) {
+    <span> Chosen model: {{ this.firstStepForm.get('model')?.value }} and color {{ this.firstStepForm.get('color')?.value }}</span>
   }
 </div>
