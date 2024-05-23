@@ -2,7 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import {inject, Injectable, signal, WritableSignal} from "@angular/core";
 import {Observable} from "rxjs";
 import {Model} from "../model/vehicle";
-import {Configuration} from "../model/configuration";
+import {Configuration, MotorConfiguration} from "../model/configuration";
 import {ConfiguredVehicle} from "../model/configured-vehicle";
 
 @Injectable({
@@ -12,6 +12,7 @@ export class TeslaApiService {
 
   configuredVehicleSignal: WritableSignal<ConfiguredVehicle> = signal(new ConfiguredVehicle());
   selectedModelSignal: WritableSignal<Model> = signal({ code: '', name: '', description: '', colors: [] });
+  selectedMotorConfigSignal: WritableSignal<MotorConfiguration> = signal({id: 0, description: '', range: 0, speed: 0, price: 0});
 
   httpClient: HttpClient = inject(HttpClient);
 
@@ -29,5 +30,9 @@ export class TeslaApiService {
 
   updateSelectedModel(updateModel: Model): void {
     this.selectedModelSignal.set(updateModel);
+  }
+
+  updateMotorConfiguration(updateMotorConfiguration: MotorConfiguration): void {
+    this.selectedMotorConfigSignal.set(updateMotorConfiguration);
   }
 }

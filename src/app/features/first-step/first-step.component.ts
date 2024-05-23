@@ -4,7 +4,6 @@ import {Model} from "../../core/model/vehicle";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ConfiguredVehicle} from "../../core/model/configured-vehicle";
-import {CarViewerComponent} from "../../shared/component/car-viewer/car-viewer.component";
 
 @Component({
   selector: 'app-first-step',
@@ -12,7 +11,6 @@ import {CarViewerComponent} from "../../shared/component/car-viewer/car-viewer.c
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CarViewerComponent
   ],
   templateUrl: './first-step.component.html',
   styleUrl: './first-step.component.scss'
@@ -23,7 +21,7 @@ export class FirstStepComponent {
   models: Signal<Model[]> = toSignal(this.teslaApiService.getModels(), {initialValue: []});
 
   configuredVehicleSignal: Signal<ConfiguredVehicle> = this.teslaApiService.configuredVehicleSignal;
-  selectedTeslaModelSignal: Signal<Model> = this.teslaApiService.selectedModelSignal!;
+  selectedTeslaModelSignal: Signal<Model> = this.teslaApiService.selectedModelSignal;
 
   firstStepForm: FormGroup = new FormGroup({
     model: new FormControl(this.configuredVehicleSignal().model, [Validators.required]),
