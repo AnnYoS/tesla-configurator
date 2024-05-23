@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AsyncPipe, JsonPipe} from '@angular/common';
 import {StepperComponent} from "./shared/component/stepper/stepper.component";
 import {RouterOutlet} from "@angular/router";
+import {CarViewerComponent} from "./shared/component/car-viewer/car-viewer.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    AsyncPipe, JsonPipe, StepperComponent, RouterOutlet
+    AsyncPipe, JsonPipe, StepperComponent, RouterOutlet, CarViewerComponent
   ],
   templateUrl: "./app.component.html",
 })

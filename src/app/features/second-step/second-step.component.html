@@ -1,1 +1,11 @@
-<p>second-step works!</p>
+<div>
+  <h2>Step 2. Select your config and options</h2>
+  <form (change)="onFormChange()" [formGroup]="secondStepForm">
+    <label for="configSelect">Model</label>
+    <select id="configSelect" name="configSelect" formControlName="config">
+      @for (config of configuration().configs; track config.id) {
+        <option value="{{ config.id }}">{{ config.description }}</option>
+      }
+    </select>
+  </form>
+</div>

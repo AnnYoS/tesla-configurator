@@ -10,14 +10,10 @@
     @if (this.firstStepForm.get('model')?.valid) {
       <label for="colorSelect">Color</label>
       <select id="colorSelect" name="colorSelect" formControlName="color">
-        @for (color of selectedTeslaModel?.colors; track color.code) {
+        @for (color of selectedTeslaModelSignal().colors; track color.code) {
           <option value="{{ color.code }}">{{ color.description }}</option>
         }
       </select>
     }
   </form>
-  <!-- TODO ajouter composant affichage photo -->
-  @if (this.firstStepForm.valid) {
-    <span> Chosen model: {{ this.firstStepForm.get('model')?.value }} and color {{ this.firstStepForm.get('color')?.value }}</span>
-  }
 </div>

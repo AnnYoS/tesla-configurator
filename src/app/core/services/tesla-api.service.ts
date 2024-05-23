@@ -1,18 +1,17 @@
 import {HttpClient} from "@angular/common/http";
-import {effect, inject, Injectable, signal, Signal, WritableSignal} from "@angular/core";
-import {BehaviorSubject, Observable} from "rxjs";
+import {inject, Injectable, signal, WritableSignal} from "@angular/core";
+import {Observable} from "rxjs";
 import {Model} from "../model/vehicle";
 import {Configuration} from "../model/configuration";
 import {ConfiguredVehicle} from "../model/configured-vehicle";
-import {toSignal} from "@angular/core/rxjs-interop";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeslaApiService {
 
-  configuredVehicle: BehaviorSubject<ConfiguredVehicle> = new BehaviorSubject<ConfiguredVehicle>(new ConfiguredVehicle());
-  vehicleSignal: WritableSignal<ConfiguredVehicle> = signal(new ConfiguredVehicle());
+  configuredVehicleSignal: WritableSignal<ConfiguredVehicle> = signal(new ConfiguredVehicle());
+  selectedModelSignal: WritableSignal<Model> = signal({ code: '', name: '', description: '', colors: [] });
 
   httpClient: HttpClient = inject(HttpClient);
 
@@ -20,7 +19,15 @@ export class TeslaApiService {
     return this.httpClient.get<Model[]>('/models');
   }
 
-  getOptions(option: string): Observable<Configuration[]> {
-    return this.httpClient.get<Configuration[]>(`/options/${option}`);
+  getConfigurations(): Observable<Configuration> {
+    return this.httpClient.get<Configuration>(`/options/${this.configuredVehicleSignal().model}`);
+  }
+
+  updateConfiguredVehicle(updateVehicle: ConfiguredVehicle): void {
+    this.configuredVehicleSignal.set(updateVehicle);
+  }
+
+  updateSelectedModel(updateModel: Model): void {
+    this.selectedModelSignal.set(updateModel);
   }
 }

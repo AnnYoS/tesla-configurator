@@ -1,5 +1,5 @@
 <div class="stepper">
   <button id="step1" type="button" routerLink="/first-step">Step 1</button>
-  <button id="step2" type="button" [disabled]="" routerLink="/second-step">Step 2</button>
-  <button id="step3" type="button" [disabled]="" routerLink="/third-step">Step 3</button>
+  <button id="step2" type="button" [disabled]="canAccessSecondStep()" routerLink="/second-step">Step 2</button>
+  <button id="step3" type="button" [disabled]="canAccessThirdStep()" routerLink="/third-step">Step 3</button>
 </div>
