@@ -7,7 +7,7 @@ import {ConfiguredVehicle, emptyCarModel, emptyColor, emptyMotorConfig} from "..
   selector: 'tesla-stepper',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss'

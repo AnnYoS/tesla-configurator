@@ -3,6 +3,7 @@
   <form [formGroup]="secondStepForm">
     <label for="configSelect">Model</label>
     <select (change)="changeConfig()" id="configSelect" name="configSelect" formControlName="config">
+      <option value="0" disabled selected>Choose...</option>
       @for (config of configuration().configs; track config.id) {
         <option value="{{ config.id }}">{{ config.description }}</option>
       }
