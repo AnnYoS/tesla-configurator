@@ -1,10 +1,10 @@
 import {Component, inject, Signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {TeslaApiService} from "../../../core/services/tesla-api.service";
-import {ConfiguredVehicle} from "../../../core/model/configured-vehicle";
+import {ConfiguredVehicle, emptyCarModel, emptyColor, emptyMotorConfig} from "../../../core/model/configured-vehicle";
 
 @Component({
-  selector: 'stepper-config',
+  selector: 'tesla-stepper',
   standalone: true,
   imports: [
     RouterLink
@@ -19,11 +19,11 @@ export class StepperComponent {
   configuredVehicle: Signal<ConfiguredVehicle> = this.teslaApiService.configuredVehicleSignal;
 
   canAccessSecondStep(): boolean {
-    return this.configuredVehicle().model == '' && this.configuredVehicle().color == '';
+    return this.configuredVehicle().model === emptyCarModel && this.configuredVehicle().color === emptyColor;
   }
 
   canAccessThirdStep(): boolean {
-    return this.configuredVehicle().config == '';
+    return this.configuredVehicle().config === emptyMotorConfig;
   }
 }
 

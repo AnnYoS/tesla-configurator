@@ -1,5 +1,5 @@
 <div>
-  @if (configuredVehicleSignal().model) {
+  @if (configuredVehicleSignal().model != emptyCarModel && configuredVehicleSignal().color != emptyColor) {
     <img [src]="imagePath()" alt="Tesla image">
   }
 </div>

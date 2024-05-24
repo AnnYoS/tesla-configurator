@@ -1,1 +1,15 @@
-<p>third-step works!</p>
+<div>
+  <h2>Step 3. Summary</h2>
+  <span>Your tesla {{ configuredVehicleSignal().model.description }}</span><br>
+  <span>{{ configuredVehicleSignal().config.description }}</span> <span> {{ configuredVehicleSignal().config.price | currency:'USD' }}</span><br>
+  <span>Range: {{ configuredVehicleSignal().config.range }} - Max speed: {{ configuredVehicleSignal().config.speed }}</span><br><br>
+  @if (configuredVehicleSignal().color.price != 0) {
+    <span>{{ configuredVehicleSignal().color.description }}</span><span> {{ configuredVehicleSignal().color.price | currency:'USD' }}</span>
+  }
+  @if (configuredVehicleSignal().towHitch) {
+    <span>Tow Hitch Package $1000</span>
+  }
+  @if (configuredVehicleSignal().yoke) {
+    <span>Yoke Package $1000</span>
+  }
+</div>

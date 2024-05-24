@@ -1,6 +1,6 @@
 <div>
   <h2>Step 1. Choose your Model and color</h2>
-  <form (change)="onFormChange()" [formGroup]="firstStepForm">
+  <form [formGroup]="firstStepForm">
     <label for="modelSelect">Model</label>
     <select (change)="changeModel()" id="modelSelect" name="modelSelect" formControlName="model">
       @for (model of models(); track model.code) {
@@ -9,8 +9,8 @@
     </select>
     @if (this.firstStepForm.get('model')?.valid) {
       <label for="colorSelect">Color</label>
-      <select id="colorSelect" name="colorSelect" formControlName="color">
-        @for (color of selectedTeslaModelSignal().colors; track color.code) {
+      <select (change)="changeColor()" id="colorSelect" name="colorSelect" formControlName="color">
+        @for (color of configuredVehicleSignal().model.colors; track color.code) {
           <option value="{{ color.code }}">{{ color.description }}</option>
         }
       </select>

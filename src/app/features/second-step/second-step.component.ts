@@ -1,36 +1,47 @@
-import {Component, inject, Signal, WritableSignal} from '@angular/core';
+import {Component, inject, Signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TeslaApiService} from "../../core/services/tesla-api.service";
 import {ConfiguredVehicle} from "../../core/model/configured-vehicle";
-import {Configuration, MotorConfiguration} from "../../core/model/configuration";
+import {Configuration} from "../../core/model/configuration";
 import {toSignal} from "@angular/core/rxjs-interop";
-import {Model} from "../../core/model/vehicle";
+import {CurrencyPipe} from "@angular/common";
 
 @Component({
   selector: 'app-second-step',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CurrencyPipe
   ],
   templateUrl: './second-step.component.html',
   styleUrl: './second-step.component.scss'
 })
 export class SecondStepComponent {
 
-  private teslaApiService: TeslaApiService = inject(TeslaApiService);
-  configuration: Signal<Configuration> = toSignal(this.teslaApiService.getConfigurations(), {initialValue: {configs: [], towHitch: false, yoke: false}})
-  configuredVehicleSignal: Signal<ConfiguredVehicle> = this.teslaApiService.configuredVehicleSignal;
-  selectedMotorConfigSignal: Signal<MotorConfiguration> = this.teslaApiService.selectedMotorConfigSignal;
+  #teslaApiService: TeslaApiService = inject(TeslaApiService);
+  configuration: Signal<Configuration> = toSignal(this. #teslaApiService.getConfigurations(), {initialValue: {configs: [], towHitch: false, yoke: false}});
+  configuredVehicleSignal: Signal<ConfiguredVehicle> = this. #teslaApiService.configuredVehicleSignal;
 
   secondStepForm: FormGroup = new FormGroup({
-    config: new FormControl(this.configuredVehicleSignal().config, [Validators.required]),
+    config: new FormControl(this.configuredVehicleSignal().config.id, [Validators.required]),
     towHitch: new FormControl(this.configuredVehicleSignal().towHitch, [Validators.required]),
     yoke: new FormControl(this.configuredVehicleSignal().yoke, [Validators.required]),
   });
 
-  onFormChange(): void {
-    const currentConfiguredVehicle = this.configuredVehicleSignal();
-    const newConfigVehicle = {...currentConfiguredVehicle, config: this.secondStepForm.get('config')?.value, towHitch: this.secondStepForm.get('towHitch')?.value, yoke: this.secondStepForm.get('yoke')?.value};
-    this.teslaApiService.updateConfiguredVehicle(newConfigVehicle);
+  changeConfig(): void {
+    if (this.secondStepForm.get('config')?.valid){
+      const motorConfig = this.configuration().configs.find(m => m.id === Number(this.secondStepForm.get('config')?.value));
+      if (motorConfig) {
+        this.#teslaApiService.updateMotorConfiguration(motorConfig);
+      }
+    }
+  }
+
+  changePackages(): void {
+    if (this.secondStepForm.get('tow')?.valid || this.secondStepForm.get('yoke')?.valid) {
+      const updateTow = this.secondStepForm.get('tow')?.value ? this.secondStepForm.get('tow')?.value : false;
+      const updateYoke = this.secondStepForm.get('yoke')?.value ? this.secondStepForm.get('yoke')?.value : false;
+      this.#teslaApiService.updateAdditionalPackages(updateTow, updateYoke);
+    }
   }
 }
