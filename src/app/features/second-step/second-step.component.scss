@@ -21,6 +21,7 @@
   width: 100%;
   flex-direction: row;
   align-items: flex-start;
+  margin-top: .5%;
 }
 
 .space-between {
@@ -30,7 +31,7 @@
 .options-flex-column {
   display: flex;
   flex-direction: column;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
 .inverse-flex-option {

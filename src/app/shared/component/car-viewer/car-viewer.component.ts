@@ -14,7 +14,8 @@ export class CarViewerComponent {
   #teslaApiService: TeslaApiService = inject(TeslaApiService);
   configuredVehicleSignal: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicleSignal
 
-  imagePath: Signal<string> = computed(() => `/assets/${this.configuredVehicleSignal().model.code}/${this.configuredVehicleSignal().color.code}.jpg`);
+  //imagePath: Signal<string> = computed(() => `/assets/${this.configuredVehicleSignal().model.code}/${this.configuredVehicleSignal().color.code}.jpg`);
+  imagePath: Signal<string> = computed(() => `https://interstate21.com/tesla-app/images/${this.configuredVehicleSignal().model.code}/${this.configuredVehicleSignal().color.code}.jpg`);
   protected readonly emptyCarModel = emptyCarModel;
   protected readonly emptyColor = emptyColor;
 }

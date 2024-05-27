@@ -3,7 +3,7 @@
   <form [formGroup]="secondStepForm">
     <div class="motor-container">
       <div>
-        <label for="configSelect">Model</label>
+        <label for="configSelect">Config</label>
         <select (change)="changeConfig()" id="configSelect" name="configSelect" formControlName="config">
           <option value="0" disabled selected>Choose...</option>
           @for (config of configuration().configs; track config.id) {
@@ -14,7 +14,7 @@
       <div class="motor-information">
       @if (configuredVehicleSignal().config.id != 0) {
         <div>Range: {{ configuredVehicleSignal().config.range }}</div>
-        <div class="space-between">Max speed: {{ configuredVehicleSignal().config.speed }}</div>
+        <div class="space-between">Max speed: {{ configuredVehicleSignal().config.speed }} miles</div>
         <div class="space-between">Cost: {{ configuredVehicleSignal().config.price | currency:'USD' }}</div>
       }
       </div>

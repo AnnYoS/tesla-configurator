@@ -21,7 +21,7 @@ export class ThirdStepComponent {
 
   configuredVehicleSignal: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicleSignal;
 
-  calculateTotalPrice(): number {
+  getTotalPrice(): number {
     let total = this.configuredVehicleSignal().config.price;
     if (this.configuredVehicleSignal().color.price != 0) {
       total += this.configuredVehicleSignal().color.price;

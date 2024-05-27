@@ -1,18 +1,39 @@
 <div class="form-container">
   <h2>Step 3. Summary</h2>
-  <span class="tesla-model">Your tesla {{ configuredVehicleSignal().model.description }}</span><br>
-  <span>{{ configuredVehicleSignal().config.description }}</span> <span> {{ configuredVehicleSignal().config.price | currency:'USD' }}</span><br>
-  <span>Range: {{ configuredVehicleSignal().config.range }} - Max speed: {{ configuredVehicleSignal().config.speed }}</span><br><br>
-  @if (configuredVehicleSignal().color.price != 0) {
-    <span>{{ configuredVehicleSignal().color.description }}</span><span> {{ configuredVehicleSignal().color.price | currency:'USD' }}</span>
-  }
-  @if (configuredVehicleSignal().towHitch) {
-    <span>Tow Hitch Package $1000</span>
-  }
-  @if (configuredVehicleSignal().yoke) {
-    <span>Yoke Package $1000</span>
-  }
-  <div>
-    <span>Final Price: {{ calculateTotalPrice() | currency:'USD' }}</span>
+  <div class="tesla-config">
+    <span class="tesla-model-title">Your Tesla {{ configuredVehicleSignal().model.description }}</span>
+    <div class="resume-table">
+      <div class="row space">
+        <div class="cell config-description">
+          <span class="description">{{ configuredVehicleSignal().config.description }}</span>
+          <span>Range: {{ configuredVehicleSignal().config.range }} miles - Max speed: {{ configuredVehicleSignal().config.speed }}</span>
+        </div>
+        <div class="cell">{{ configuredVehicleSignal().config.price | currency:'USD' }}</div>
+      </div>
+      <div class="space"></div>
+      @if (configuredVehicleSignal().color.price != 0) {
+        <div class="row">
+          <div class="cell description">{{ configuredVehicleSignal().color.description }}</div>
+          <div class="cell">{{ configuredVehicleSignal().color.price | currency:'USD' }}</div>
+        </div>
+      }
+      @if (configuredVehicleSignal().towHitch) {
+        <div class="row">
+          <div class="cell description">Tow Hitch Package</div>
+          <div class="cell">$1,000</div>
+        </div>
+      }
+      @if (configuredVehicleSignal().yoke) {
+        <div class="row">
+          <div class="cell description">Yoke Package</div>
+          <div class="cell">$1,000</div>
+        </div>
+      }
+      <div class="total-line"></div>
+      <div class="row">
+        <div class="cell description">TOTAL COST</div>
+        <div class="cell">{{ getTotalPrice() | currency:'USD' }}</div>
+      </div>
+    </div>
   </div>
 </div>
