@@ -21,7 +21,6 @@ export class FirstStepComponent {
   models: Signal<Model[]> = toSignal(this.#teslaApiService.getModels(), {initialValue: []});
 
   configuredVehicleSignal: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicleSignal;
-  //selectedTeslaModelSignal: Signal<Model> = this.#teslaApiService.selectedModelSignal;
 
   firstStepForm: FormGroup = new FormGroup({
     model: new FormControl(this.configuredVehicleSignal().model.code, [Validators.required]),
@@ -47,15 +46,4 @@ export class FirstStepComponent {
       }
     }
   }
-
-  /*private saveFirstStepConfiguration(resetSecondStep: boolean): void {
-    const currentConfiguredVehicle: ConfiguredVehicle = this.configuredVehicleSignal();
-    let newConfigVehicle
-    if (resetSecondStep) {
-      newConfigVehicle = {...currentConfiguredVehicle, model: this.firstStepForm.get('model')?.value, color: this.firstStepForm.get('color')?.valid ? this.firstStepForm.get('color')?.value : '', config: '', towHitch: false, yoke: false };
-    } else {
-      newConfigVehicle =  {...currentConfiguredVehicle, model: this.firstStepForm.get('model')?.value, color: this.firstStepForm.get('color')?.valid ? this.firstStepForm.get('color')?.value : '' };
-    }
-    this.#teslaApiService.updateConfiguredVehicle(newConfigVehicle);
-  }*/
 }

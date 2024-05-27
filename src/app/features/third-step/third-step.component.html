@@ -1,6 +1,6 @@
-<div>
+<div class="form-container">
   <h2>Step 3. Summary</h2>
-  <span>Your tesla {{ configuredVehicleSignal().model.description }}</span><br>
+  <span class="tesla-model">Your tesla {{ configuredVehicleSignal().model.description }}</span><br>
   <span>{{ configuredVehicleSignal().config.description }}</span> <span> {{ configuredVehicleSignal().config.price | currency:'USD' }}</span><br>
   <span>Range: {{ configuredVehicleSignal().config.range }} - Max speed: {{ configuredVehicleSignal().config.speed }}</span><br><br>
   @if (configuredVehicleSignal().color.price != 0) {
@@ -12,4 +12,7 @@
   @if (configuredVehicleSignal().yoke) {
     <span>Yoke Package $1000</span>
   }
+  <div>
+    <span>Final Price: {{ calculateTotalPrice() | currency:'USD' }}</span>
+  </div>
 </div>

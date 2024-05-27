@@ -44,7 +44,7 @@ export class TeslaApiService {
 
   updateAdditionalPackages(updateTow: boolean, updateYoke: boolean): void {
     const currentConfiguredVehicle = this.configuredVehicleSignal();
-    const newConfiguredVehicle = {...currentConfiguredVehicle, tow: updateTow, yoke: updateYoke };
+    const newConfiguredVehicle = {...currentConfiguredVehicle, towHitch: updateTow, yoke: updateYoke };
     this.configuredVehicleSignal.set(newConfiguredVehicle);
   }
 }

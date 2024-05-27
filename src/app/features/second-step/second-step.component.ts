@@ -39,7 +39,7 @@ export class SecondStepComponent {
 
   changePackages(): void {
     if (this.secondStepForm.get('tow')?.valid || this.secondStepForm.get('yoke')?.valid) {
-      const updateTow = this.secondStepForm.get('tow')?.value ? this.secondStepForm.get('tow')?.value : false;
+      const updateTow = this.secondStepForm.get('towHitch')?.value ? this.secondStepForm.get('towHitch')?.value : false;
       const updateYoke = this.secondStepForm.get('yoke')?.value ? this.secondStepForm.get('yoke')?.value : false;
       this.#teslaApiService.updateAdditionalPackages(updateTow, updateYoke);
     }

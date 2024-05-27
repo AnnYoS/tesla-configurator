@@ -1,26 +1,37 @@
-<div>
+<div class="form-container">
   <h2>Step 2. Select your config and options</h2>
   <form [formGroup]="secondStepForm">
-    <label for="configSelect">Model</label>
-    <select (change)="changeConfig()" id="configSelect" name="configSelect" formControlName="config">
-      <option value="0" disabled selected>Choose...</option>
-      @for (config of configuration().configs; track config.id) {
-        <option value="{{ config.id }}">{{ config.description }}</option>
+    <div class="motor-container">
+      <div>
+        <label for="configSelect">Model</label>
+        <select (change)="changeConfig()" id="configSelect" name="configSelect" formControlName="config">
+          <option value="0" disabled selected>Choose...</option>
+          @for (config of configuration().configs; track config.id) {
+            <option value="{{ config.id }}">{{ config.description }}</option>
+          }
+        </select>
+      </div>
+      <div class="motor-information">
+      @if (configuredVehicleSignal().config.id != 0) {
+        <div>Range: {{ configuredVehicleSignal().config.range }}</div>
+        <div class="space-between">Max speed: {{ configuredVehicleSignal().config.speed }}</div>
+        <div class="space-between">Cost: {{ configuredVehicleSignal().config.price | currency:'USD' }}</div>
       }
-    </select>
-    @if (configuredVehicleSignal().config.id != 0) {
-      <span>Range: {{ configuredVehicleSignal().config.range }}</span>
-      <span>Max speed: {{ configuredVehicleSignal().config.speed }}</span>
-      <span>Cost: {{ configuredVehicleSignal().config.price | currency:'USD' }}</span>
-    }
-    <div>
-
+      </div>
     </div>
-    @if (configuration().towHitch) {
-      <input id="includeTow" type="checkbox" (change)="changePackages()" formControlName="towHitch"> Tow hitch ?
-    }
-    @if (configuration().yoke) {
-      <input id="includeYoke" type="checkbox" (change)="changePackages()" formControlName="yoke"> Yoke steering wheel ?
+    @if (configuration().towHitch || configuration().yoke) {
+      <div class="options-flex-column">
+        <div class="inverse-flex-option">
+          @if (configuration().towHitch) {
+            <input id="includeTow" type="checkbox" (change)="changePackages()" formControlName="towHitch"> Tow hitch ?
+          }
+        </div>
+        <div class="inverse-flex-option">
+          @if (configuration().yoke) {
+            <input id="includeYoke" type="checkbox" (change)="changePackages()" formControlName="yoke"> Yoke steering wheel ?
+          }
+        </div>
+      </div>
     }
   </form>
 </div>

@@ -1,20 +1,24 @@
-<div>
+<div class="form-container">
   <h2>Step 1. Choose your Model and color</h2>
-  <form [formGroup]="firstStepForm">
-    <label for="modelSelect">Model</label>
-    <select (change)="changeModel()" id="modelSelect" name="modelSelect" formControlName="model">
-      <option value="" disabled selected>Choose...</option>
-      @for (model of models(); track model.code) {
-        <option value="{{ model.code }}">{{ model.description }}</option>
-      }
-    </select>
-    @if (this.firstStepForm.get('model')?.valid) {
-      <label for="colorSelect">Color</label>
-      <select (change)="changeColor()" id="colorSelect" name="colorSelect" formControlName="color">
-        @for (color of configuredVehicleSignal().model.colors; track color.code) {
-          <option value="{{ color.code }}">{{ color.description }}</option>
+  <form class="form-flex-row" [formGroup]="firstStepForm">
+    <div>
+      <label for="modelSelect">Model</label>
+      <select (change)="changeModel()" id="modelSelect" name="modelSelect" formControlName="model">
+        <option value="" disabled selected>Choose...</option>
+        @for (model of models(); track model.code) {
+          <option value="{{ model.code }}">{{ model.description }}</option>
         }
       </select>
+    </div>
+    @if (this.firstStepForm.get('model')?.valid) {
+      <div>
+        <label for="colorSelect">Color</label>
+        <select (change)="changeColor()" id="colorSelect" name="colorSelect" formControlName="color">
+          @for (color of configuredVehicleSignal().model.colors; track color.code) {
+            <option value="{{ color.code }}">{{ color.description }}</option>
+          }
+        </select>
+      </div>
     }
   </form>
 </div>
