@@ -4,8 +4,6 @@ import {Model} from "../../core/model/vehicle-model";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ConfiguredVehicle} from "../../core/model/configured-vehicle";
-import {catchError, Observable} from "rxjs";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-first-step',
