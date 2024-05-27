@@ -1,6 +1,6 @@
 import {Component, computed, inject, Signal} from '@angular/core';
-import {TeslaApiService} from '../../../core/services/tesla-api.service';
-import {ConfiguredVehicle, emptyCarModel, emptyColor} from '../../../core/model/configured-vehicle';
+import {TeslaApiService} from '../../core/services/tesla-api.service';
+import {ConfiguredVehicle, emptyCarModel, emptyColor} from '../../core/model/configured-vehicle';
 
 @Component({
   selector: 'tesla-viewer',

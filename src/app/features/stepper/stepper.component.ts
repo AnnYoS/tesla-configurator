@@ -1,7 +1,7 @@
 import {Component, inject, Signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {TeslaApiService} from "../../../core/services/tesla-api.service";
-import {ConfiguredVehicle, emptyCarModel, emptyColor, emptyMotorConfig} from "../../../core/model/configured-vehicle";
+import {TeslaApiService} from "../../core/services/tesla-api.service";
+import {ConfiguredVehicle, emptyCarModel, emptyColor, emptyMotorConfig} from "../../core/model/configured-vehicle";
 
 @Component({
   selector: 'tesla-stepper',
