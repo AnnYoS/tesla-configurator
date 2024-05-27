@@ -10,41 +10,40 @@ import {ConfiguredVehicle, emptyMotorConfig} from "../model/configured-vehicle";
 })
 export class TeslaApiService {
 
-  configuredVehicleSignal: WritableSignal<ConfiguredVehicle> = signal(new ConfiguredVehicle());
-
   httpClient: HttpClient = inject(HttpClient);
+  configuredVehicle: WritableSignal<ConfiguredVehicle> = signal(new ConfiguredVehicle());
 
   getModels(): Observable<Model[]> {
     return this.httpClient.get<Model[]>('/models');
   }
 
   getConfigurations(): Observable<Configuration> {
-    return this.httpClient.get<Configuration>(`/options/${this.configuredVehicleSignal().model.code}`);
+    return this.httpClient.get<Configuration>(`/options/${this.configuredVehicle().model.code}`);
   }
 
   updateSelectedModel(updatedModel: Model): void {
-    const currentConfiguredVehicle = this.configuredVehicleSignal();
+    const currentConfiguredVehicle = this.configuredVehicle();
     const newConfiguredVehicle = {...currentConfiguredVehicle, model: updatedModel };
-    this.configuredVehicleSignal.set(newConfiguredVehicle);
+    this.configuredVehicle.set(newConfiguredVehicle);
     this.updateMotorConfiguration(emptyMotorConfig);
     this.updateAdditionalPackages(false, false);
   }
 
   updateSelectedColor(updatedColor: Color): void {
-    const currentConfiguredVehicle = this.configuredVehicleSignal();
+    const currentConfiguredVehicle = this.configuredVehicle();
     const newConfiguredVehicle = {...currentConfiguredVehicle, color: updatedColor };
-    this.configuredVehicleSignal.set(newConfiguredVehicle);
+    this.configuredVehicle.set(newConfiguredVehicle);
   }
 
   updateMotorConfiguration(updateMotorConfiguration: MotorConfiguration): void {
-    const currentConfiguredVehicle = this.configuredVehicleSignal();
+    const currentConfiguredVehicle = this.configuredVehicle();
     const newConfiguredVehicle = {...currentConfiguredVehicle, config: updateMotorConfiguration };
-    this.configuredVehicleSignal.set(newConfiguredVehicle);
+    this.configuredVehicle.set(newConfiguredVehicle);
   }
 
   updateAdditionalPackages(updateTow: boolean, updateYoke: boolean): void {
-    const currentConfiguredVehicle = this.configuredVehicleSignal();
+    const currentConfiguredVehicle = this.configuredVehicle();
     const newConfiguredVehicle = {...currentConfiguredVehicle, towHitch: updateTow, yoke: updateYoke };
-    this.configuredVehicleSignal.set(newConfiguredVehicle);
+    this.configuredVehicle.set(newConfiguredVehicle);
   }
 }

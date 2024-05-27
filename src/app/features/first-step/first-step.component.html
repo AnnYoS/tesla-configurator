@@ -5,7 +5,7 @@
       <label for="modelSelect">Model</label>
       <select (change)="changeModel()" id="modelSelect" name="modelSelect" formControlName="model">
         <option value="" disabled selected>Choose...</option>
-        @for (model of modelsSignal(); track model.code) {
+        @for (model of models(); track model.code) {
           <option value="{{ model.code }}">{{ model.description }}</option>
         }
       </select>
@@ -14,7 +14,7 @@
       <div>
         <label for="colorSelect">Color</label>
         <select (change)="changeColor()" id="colorSelect" name="colorSelect" formControlName="color">
-          @for (color of configuredVehicleSignal().model.colors; track color.code) {
+          @for (color of configuredVehicle().model.colors; track color.code) {
             <option value="{{ color.code }}">{{ color.description }}</option>
           }
         </select>

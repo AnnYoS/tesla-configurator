@@ -18,20 +18,20 @@ import {ConfiguredVehicle} from "../../core/model/configured-vehicle";
 export class FirstStepComponent {
 
   #teslaApiService: TeslaApiService = inject(TeslaApiService);
-  readonly modelsSignal: Signal<Model[]> = toSignal(this.#teslaApiService.getModels(), {initialValue: []});
-  readonly configuredVehicleSignal: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicleSignal;
+  readonly models: Signal<Model[]> = toSignal(this.#teslaApiService.getModels(), {initialValue: []});
+  readonly configuredVehicle: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicle;
 
   firstStepForm: FormGroup = new FormGroup({
-    model: new FormControl(this.configuredVehicleSignal().model.code, [Validators.required]),
-    color: new FormControl(this.configuredVehicleSignal().color.code, [Validators.required]),
+    model: new FormControl(this.configuredVehicle().model.code, [Validators.required]),
+    color: new FormControl(this.configuredVehicle().color.code, [Validators.required]),
   });
 
   changeModel(): void {
     if (this.firstStepForm.get('model')?.valid) {
-      const model = this.modelsSignal().find(m => m.code === this.firstStepForm.get('model')?.value);
+      const model = this.models().find(m => m.code === this.firstStepForm.get('model')?.value);
       if (model) {
         this.#teslaApiService.updateSelectedModel(model);
-        this.firstStepForm.get('color')?.setValue(this.configuredVehicleSignal().model.colors[0].code);
+        this.firstStepForm.get('color')?.setValue(this.configuredVehicle().model.colors[0].code);
         this.changeColor();
       }
     }
@@ -39,7 +39,7 @@ export class FirstStepComponent {
 
   changeColor(): void {
     if (this.firstStepForm.get('color')?.valid) {
-      const color = this.configuredVehicleSignal().model.colors.find(c => c.code === this.firstStepForm.get('color')?.value);
+      const color = this.configuredVehicle().model.colors.find(c => c.code === this.firstStepForm.get('color')?.value);
       if (color) {
         this.#teslaApiService.updateSelectedColor(color);
       }

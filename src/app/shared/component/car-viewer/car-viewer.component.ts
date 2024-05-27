@@ -12,9 +12,9 @@ import {ConfiguredVehicle, emptyCarModel, emptyColor} from '../../../core/model/
 export class CarViewerComponent {
 
   #teslaApiService: TeslaApiService = inject(TeslaApiService);
-  readonly configuredVehicleSignal: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicleSignal
+  readonly configuredVehicle: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicle
 
-  imagePath: Signal<string> = computed(() => `https://interstate21.com/tesla-app/images/${this.configuredVehicleSignal().model.code}/${this.configuredVehicleSignal().color.code}.jpg`);
+  imagePath: Signal<string> = computed(() => `https://interstate21.com/tesla-app/images/${this.configuredVehicle().model.code}/${this.configuredVehicle().color.code}.jpg`);
   protected readonly emptyCarModel = emptyCarModel;
   protected readonly emptyColor = emptyColor;
 }

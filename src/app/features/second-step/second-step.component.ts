@@ -20,12 +20,12 @@ export class SecondStepComponent {
 
   #teslaApiService: TeslaApiService = inject(TeslaApiService);
   readonly configuration: Signal<Configuration> = toSignal(this. #teslaApiService.getConfigurations(), {initialValue: {configs: [], towHitch: false, yoke: false}});
-  readonly configuredVehicleSignal: Signal<ConfiguredVehicle> = this. #teslaApiService.configuredVehicleSignal;
+  readonly configuredVehicle: Signal<ConfiguredVehicle> = this. #teslaApiService.configuredVehicle;
 
   secondStepForm: FormGroup = new FormGroup({
-    config: new FormControl(this.configuredVehicleSignal().config.id, [Validators.required]),
-    towHitch: new FormControl(this.configuredVehicleSignal().towHitch, [Validators.required]),
-    yoke: new FormControl(this.configuredVehicleSignal().yoke, [Validators.required]),
+    config: new FormControl(this.configuredVehicle().config.id, [Validators.required]),
+    towHitch: new FormControl(this.configuredVehicle().towHitch, [Validators.required]),
+    yoke: new FormControl(this.configuredVehicle().yoke, [Validators.required]),
   });
 
   changeConfig(): void {

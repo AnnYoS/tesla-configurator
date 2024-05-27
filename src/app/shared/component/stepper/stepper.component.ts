@@ -14,8 +14,8 @@ import {ConfiguredVehicle, emptyCarModel, emptyColor, emptyMotorConfig} from "..
 })
 export class StepperComponent {
 
-  private teslaApiService: TeslaApiService = inject(TeslaApiService);
-  readonly configuredVehicle: Signal<ConfiguredVehicle> = this.teslaApiService.configuredVehicleSignal;
+  #teslaApiService: TeslaApiService = inject(TeslaApiService);
+  readonly configuredVehicle: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicle;
 
   canAccessSecondStep(): boolean {
     return this.configuredVehicle().model === emptyCarModel && this.configuredVehicle().color === emptyColor;

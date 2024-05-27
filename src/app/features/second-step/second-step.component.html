@@ -12,10 +12,10 @@
         </select>
       </div>
       <div class="motor-information">
-      @if (configuredVehicleSignal().config.id != 0) {
-        <div>Range: {{ configuredVehicleSignal().config.range }} miles</div>
-        <div class="space-between">Max speed: {{ configuredVehicleSignal().config.speed }}</div>
-        <div class="space-between">Cost: {{ configuredVehicleSignal().config.price | currency:'USD' }}</div>
+      @if (configuredVehicle().config.id != 0) {
+        <div>Range: {{ configuredVehicle().config.range }} miles</div>
+        <div class="space-between">Max speed: {{ configuredVehicle().config.speed }}</div>
+        <div class="space-between">Cost: {{ configuredVehicle().config.price | currency:'USD' }}</div>
       }
       </div>
     </div>

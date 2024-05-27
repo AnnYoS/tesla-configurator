@@ -1,29 +1,29 @@
 <div class="form-container">
   <h2>Step 3. Summary</h2>
   <div class="tesla-config">
-    <span class="tesla-model-title">Your Tesla {{ configuredVehicleSignal().model.description }}</span>
+    <span class="tesla-model-title">Your Tesla {{ configuredVehicle().model.description }}</span>
     <div class="resume-table">
       <div class="row space">
         <div class="cell config-description">
-          <span class="description">{{ configuredVehicleSignal().config.description }}</span>
-          <span>Range: {{ configuredVehicleSignal().config.range }} miles - Max speed: {{ configuredVehicleSignal().config.speed }}</span>
+          <span class="description">{{ configuredVehicle().config.description }}</span>
+          <span>Range: {{ configuredVehicle().config.range }} miles - Max speed: {{ configuredVehicle().config.speed }}</span>
         </div>
-        <div class="cell">{{ configuredVehicleSignal().config.price | currency:'USD' }}</div>
+        <div class="cell">{{ configuredVehicle().config.price | currency:'USD' }}</div>
       </div>
       <div class="space"></div>
-      @if (configuredVehicleSignal().color.price != 0) {
+      @if (configuredVehicle().color.price != 0) {
         <div class="row">
-          <div class="cell description">{{ configuredVehicleSignal().color.description }}</div>
-          <div class="cell">{{ configuredVehicleSignal().color.price | currency:'USD' }}</div>
+          <div class="cell description">{{ configuredVehicle().color.description }}</div>
+          <div class="cell">{{ configuredVehicle().color.price | currency:'USD' }}</div>
         </div>
       }
-      @if (configuredVehicleSignal().towHitch) {
+      @if (configuredVehicle().towHitch) {
         <div class="row">
           <div class="cell description">Tow Hitch Package</div>
           <div class="cell">{{1000 | currency: 'USD'}}</div>
         </div>
       }
-      @if (configuredVehicleSignal().yoke) {
+      @if (configuredVehicle().yoke) {
         <div class="row">
           <div class="cell description">Yoke Package</div>
           <div class="cell">{{1000 | currency: 'USD'}}</div>

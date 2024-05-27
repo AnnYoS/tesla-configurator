@@ -18,17 +18,17 @@ import {TeslaApiService} from "../../core/services/tesla-api.service";
 export class ThirdStepComponent {
 
   #teslaApiService: TeslaApiService = inject(TeslaApiService);
-  readonly configuredVehicleSignal: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicleSignal;
+  readonly configuredVehicle: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicle;
 
   getTotalPrice(): number {
-    let total = this.configuredVehicleSignal().config.price;
-    if (this.configuredVehicleSignal().color.price != 0) {
-      total += this.configuredVehicleSignal().color.price;
+    let total = this.configuredVehicle().config.price;
+    if (this.configuredVehicle().color.price != 0) {
+      total += this.configuredVehicle().color.price;
     }
-    if (this.configuredVehicleSignal().towHitch) {
+    if (this.configuredVehicle().towHitch) {
       total += 1000;
     }
-    if (this.configuredVehicleSignal().yoke) {
+    if (this.configuredVehicle().yoke) {
       total += 1000;
     }
     return total;
