@@ -1,4 +1,4 @@
-import {Color, Model} from "./vehicle";
+import {Color, Model} from "./vehicle-model";
 import {MotorConfiguration} from "./configuration";
 
 export class ConfiguredVehicle {

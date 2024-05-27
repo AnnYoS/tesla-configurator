@@ -1,7 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {inject, Injectable, signal, WritableSignal} from "@angular/core";
 import {Observable} from "rxjs";
-import {Color, Model} from "../model/vehicle";
+import {Color, Model} from "../model/vehicle-model";
 import {Configuration, MotorConfiguration} from "../model/configuration";
 import {ConfiguredVehicle, emptyMotorConfig} from "../model/configured-vehicle";
 

@@ -20,13 +20,13 @@
       @if (configuredVehicleSignal().towHitch) {
         <div class="row">
           <div class="cell description">Tow Hitch Package</div>
-          <div class="cell">$1,000</div>
+          <div class="cell">{{1000 | currency: 'USD'}}</div>
         </div>
       }
       @if (configuredVehicleSignal().yoke) {
         <div class="row">
           <div class="cell description">Yoke Package</div>
-          <div class="cell">$1,000</div>
+          <div class="cell">{{1000 | currency: 'USD'}}</div>
         </div>
       }
       <div class="total-line"></div>

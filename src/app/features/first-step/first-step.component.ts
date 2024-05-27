@@ -1,9 +1,11 @@
 import {Component, inject, Signal} from '@angular/core';
 import {TeslaApiService} from "../../core/services/tesla-api.service";
-import {Model} from "../../core/model/vehicle";
+import {Model} from "../../core/model/vehicle-model";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ConfiguredVehicle} from "../../core/model/configured-vehicle";
+import {catchError, Observable} from "rxjs";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-first-step',
@@ -18,9 +20,8 @@ import {ConfiguredVehicle} from "../../core/model/configured-vehicle";
 export class FirstStepComponent {
 
   #teslaApiService: TeslaApiService = inject(TeslaApiService);
-  models: Signal<Model[]> = toSignal(this.#teslaApiService.getModels(), {initialValue: []});
-
-  configuredVehicleSignal: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicleSignal;
+  readonly modelsSignal: Signal<Model[]> = toSignal(this.#teslaApiService.getModels(), {initialValue: []});
+  readonly configuredVehicleSignal: Signal<ConfiguredVehicle> = this.#teslaApiService.configuredVehicleSignal;
 
   firstStepForm: FormGroup = new FormGroup({
     model: new FormControl(this.configuredVehicleSignal().model.code, [Validators.required]),
@@ -29,7 +30,7 @@ export class FirstStepComponent {
 
   changeModel(): void {
     if (this.firstStepForm.get('model')?.valid) {
-      const model = this.models().find(m => m.code === this.firstStepForm.get('model')?.value);
+      const model = this.modelsSignal().find(m => m.code === this.firstStepForm.get('model')?.value);
       if (model) {
         this.#teslaApiService.updateSelectedModel(model);
         this.firstStepForm.get('color')?.setValue(this.configuredVehicleSignal().model.colors[0].code);

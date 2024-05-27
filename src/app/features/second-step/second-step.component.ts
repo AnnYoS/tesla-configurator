@@ -19,8 +19,8 @@ import {CurrencyPipe} from "@angular/common";
 export class SecondStepComponent {
 
   #teslaApiService: TeslaApiService = inject(TeslaApiService);
-  configuration: Signal<Configuration> = toSignal(this. #teslaApiService.getConfigurations(), {initialValue: {configs: [], towHitch: false, yoke: false}});
-  configuredVehicleSignal: Signal<ConfiguredVehicle> = this. #teslaApiService.configuredVehicleSignal;
+  readonly configuration: Signal<Configuration> = toSignal(this. #teslaApiService.getConfigurations(), {initialValue: {configs: [], towHitch: false, yoke: false}});
+  readonly configuredVehicleSignal: Signal<ConfiguredVehicle> = this. #teslaApiService.configuredVehicleSignal;
 
   secondStepForm: FormGroup = new FormGroup({
     config: new FormControl(this.configuredVehicleSignal().config.id, [Validators.required]),

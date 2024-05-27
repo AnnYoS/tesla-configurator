@@ -13,8 +13,8 @@
       </div>
       <div class="motor-information">
       @if (configuredVehicleSignal().config.id != 0) {
-        <div>Range: {{ configuredVehicleSignal().config.range }}</div>
-        <div class="space-between">Max speed: {{ configuredVehicleSignal().config.speed }} miles</div>
+        <div>Range: {{ configuredVehicleSignal().config.range }} miles</div>
+        <div class="space-between">Max speed: {{ configuredVehicleSignal().config.speed }}</div>
         <div class="space-between">Cost: {{ configuredVehicleSignal().config.price | currency:'USD' }}</div>
       }
       </div>
